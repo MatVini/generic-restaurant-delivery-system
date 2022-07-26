@@ -1,20 +1,21 @@
-package com.br.matvcirino.genericRestauranDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Cliente {
 	
-	private @Id @GeneratedValue Long id;
+	private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
 	private String nome;
 	private String telefone;
 	private String endereco;
 	
 	Cliente() {}
 	
-	Cliente(String nome, String telefone, String endereco) {
+	public Cliente(String nome, String telefone, String endereco) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;

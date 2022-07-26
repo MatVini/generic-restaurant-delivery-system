@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestauranDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
