@@ -1,24 +1,39 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
 	
-	private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String nome;
+	
 	private String telefone;
+	
 	private String endereco;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "idCliente")
+	private List<Pedido> pedidos;
 	
 	Cliente() {}
 	
-	public Cliente(String nome, String telefone, String endereco) {
+	public Cliente(String nome, String telefone, String endereco, List<Pedido> pedidos) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
+		this.pedidos = pedidos;
 	}
 	
 	public Long getId() {
@@ -48,4 +63,13 @@ public class Cliente {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
 }

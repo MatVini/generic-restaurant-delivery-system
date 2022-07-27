@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,8 +7,11 @@ import javax.persistence.Id;
 @Entity
 public class Pedido {
 
-	private @Id @GeneratedValue Long id;
+	@Id @GeneratedValue
+	private Long id;
+	
 	private Long idCliente;
+	
 	private String especificacoes;
 
 	Pedido() {}

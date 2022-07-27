@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.controller;
 
 import java.util.List;
 
@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Cliente;
+import com.br.matvcirino.genericRestaurantDeliverySystem.exceptions.ClienteNotFoundException;
+import com.br.matvcirino.genericRestaurantDeliverySystem.repository.RepositorioCliente;
 
 @RestController
 @RequestMapping("/clientes")
@@ -38,7 +42,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.ACCEPTED)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente novoCliente) {
 		return repositorio.findById(id).map(cliente -> {
 					cliente.setNome(novoCliente.getNome());
