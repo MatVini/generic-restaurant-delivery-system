@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem.controller;
+package com.br.matvcirino.genericRestaurantDeliverySystem;
 
 import java.util.List;
 
@@ -14,20 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Cliente;
-import com.br.matvcirino.genericRestaurantDeliverySystem.exceptions.ClienteNotFoundException;
-import com.br.matvcirino.genericRestaurantDeliverySystem.repository.RepositorioCliente;
-
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
 	@Autowired
 	private RepositorioCliente repositorio;
-	
-	/*ClienteController(RepositorioCliente repositorio) {
-		this.repositorio = repositorio;
-	}*/
 	
 	@GetMapping
 	List<Cliente> listarTodos() {

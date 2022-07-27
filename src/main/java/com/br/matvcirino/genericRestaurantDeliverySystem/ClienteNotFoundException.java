@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem.exceptions;
+package com.br.matvcirino.genericRestaurantDeliverySystem;
 
 @SuppressWarnings("serial")
 public class ClienteNotFoundException extends RuntimeException {
