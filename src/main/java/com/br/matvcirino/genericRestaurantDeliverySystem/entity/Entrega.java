@@ -14,12 +14,13 @@ public class Entrega {
 	@Id
 	private Long idPedido;
 	
-	@Enumerated(EnumType.STRING) @Column(length = 12)
+	@Enumerated(EnumType.STRING)
+	@Column(length = 12)
 	private StatusDeEntrega status;
 	
 	Entrega() {}
 	
-	Entrega (StatusDeEntrega status) {
+	public Entrega (StatusDeEntrega status) {
 		this.status = status;
 	}
 
