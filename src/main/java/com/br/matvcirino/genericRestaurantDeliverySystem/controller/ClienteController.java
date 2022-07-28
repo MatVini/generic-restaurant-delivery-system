@@ -24,34 +24,34 @@ public class ClienteController {
 
 	@Autowired
 	private RepositorioCliente repositorio;
-	
+
 	@GetMapping
 	List<Cliente> listarTodos() {
 		return repositorio.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Cliente novoCliente(@RequestBody Cliente novoCliente) {
 		return repositorio.save(novoCliente);
 	}
-	
+
 	@GetMapping("/{id}")
 	Cliente listarUm(@PathVariable Long id) {
 		return repositorio.findById(id).orElseThrow(() -> new ClienteNotFoundException(id));
 	}
-	
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente novoCliente) {
 		return repositorio.findById(id).map(cliente -> {
-					cliente.setNome(novoCliente.getNome());
-					cliente.setTelefone(novoCliente.getTelefone());
-					cliente.setEndereco(novoCliente.getEndereco());
-					return repositorio.save(cliente);
-				}).orElseThrow(() -> new ClienteNotFoundException(id));
+			cliente.setNome(novoCliente.getNome());
+			cliente.setTelefone(novoCliente.getTelefone());
+			cliente.setEndereco(novoCliente.getEndereco());
+			return repositorio.save(cliente);
+		}).orElseThrow(() -> new ClienteNotFoundException(id));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deletarCliente(@PathVariable Long id) {

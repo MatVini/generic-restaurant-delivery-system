@@ -7,14 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cliente {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
@@ -23,8 +24,8 @@ public class Cliente {
 	
 	private String endereco;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "idCliente")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+	@JsonManagedReference
 	private List<Pedido> pedidos;
 	
 	Cliente() {}
