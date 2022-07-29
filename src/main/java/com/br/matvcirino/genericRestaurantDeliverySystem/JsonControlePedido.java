@@ -1,13 +1,13 @@
 package com.br.matvcirino.genericRestaurantDeliverySystem;
 
-public class JsonControle {
+public class JsonControlePedido {
 	
 	private Long clienteId;
 	private String especificacoes;
 	
-	JsonControle() {}
+	JsonControlePedido() {}
 	
-	public JsonControle(Long clienteId, String especificacoes) {
+	public JsonControlePedido(Long clienteId, String especificacoes) {
 		this.clienteId = clienteId;
 		this.especificacoes = especificacoes;
 	}

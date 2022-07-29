@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.matvcirino.genericRestaurantDeliverySystem.JsonControle;
+import com.br.matvcirino.genericRestaurantDeliverySystem.JsonControlePedido;
 import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Cliente;
 import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Pedido;
 import com.br.matvcirino.genericRestaurantDeliverySystem.exceptions.PedidoNotFoundException;
@@ -38,7 +38,7 @@ public class PedidoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	Pedido novoPedido(@RequestBody JsonControle json) {
+	Pedido novoPedido(@RequestBody JsonControlePedido json) {
 		Cliente cliente = repCliente.getReferenceById(json.getClienteId());
 		String especificacoes = json.getEspecificacoes();
 		Pedido novoPedido = new Pedido(cliente, especificacoes);
@@ -52,7 +52,7 @@ public class PedidoController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	Pedido atualizarPedido(@PathVariable Long id, @RequestBody JsonControle json) {
+	Pedido atualizarPedido(@PathVariable Long id, @RequestBody JsonControlePedido json) {
 		return repositorio.findById(id).map(pedido -> {
 			Cliente cliente = repCliente.getReferenceById(json.getClienteId());
 			String especificacoes = json.getEspecificacoes();
