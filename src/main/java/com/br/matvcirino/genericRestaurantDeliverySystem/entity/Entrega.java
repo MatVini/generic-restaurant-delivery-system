@@ -6,8 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import com.br.matvcirino.genericRestaurantDeliverySystem.StatusDeEntrega;
-
 @Entity
 public class Entrega {
 

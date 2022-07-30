@@ -1,4 +1,4 @@
-package com.br.matvcirino.genericRestaurantDeliverySystem;
+package com.br.matvcirino.genericRestaurantDeliverySystem.entity;
 
 public enum StatusDeEntrega {
 	NÃO_ENVIADO,

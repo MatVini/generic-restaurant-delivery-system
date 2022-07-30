@@ -14,23 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.matvcirino.genericRestaurantDeliverySystem.StatusDeEntrega;
 import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Entrega;
+import com.br.matvcirino.genericRestaurantDeliverySystem.entity.StatusDeEntrega;
 import com.br.matvcirino.genericRestaurantDeliverySystem.exceptions.PedidoNotFoundException;
 import com.br.matvcirino.genericRestaurantDeliverySystem.repository.RepositorioEntrega;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/entregas")
+@Tag(name = "Entregas", description = "API para controle de entregas")
 public class EntregaController {
 
 	@Autowired
 	private RepositorioEntrega repositorio;
 	
+	@Operation(summary = "Lista todas as entregas registradas", description = "", tags = {"Entregas"})
 	@GetMapping
 	List<Entrega> listarTodos() {
 		return repositorio.findAll();
 	}
 	
+	@Operation(summary = "Registra uma entrega", description = "Só requer o ID do pedido, o status é automaticamente setado como 'NÃO_ENVIADO'.", tags = {"Entregas"})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Entrega novaEntrega (@RequestBody Long id) {
@@ -39,11 +45,13 @@ public class EntregaController {
 		return repositorio.save(entrega);
 	}
 	
+	@Operation(summary = "Mostra uma entrega, buscando pelo ID do pedido", description = "", tags = {"Entregas"})
 	@GetMapping("/{id}")
 	Entrega listarUm (@PathVariable Long id) {
 		return repositorio.findById(id).orElseThrow(() -> new PedidoNotFoundException(id));
 	}
 	
+	@Operation(summary = "Atualiza dados de uma entrega", description = "Aceita os valores 'NÃO_ENVIADO', 'A_CAMINHO' e 'ENTREGE'.", tags = {"Entregas"})
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	Entrega atualizarEntrega(@PathVariable Long id, @RequestBody StatusDeEntrega status) {
@@ -53,6 +61,7 @@ public class EntregaController {
 		}).orElseThrow(() -> new PedidoNotFoundException(id));
 	}
 	
+	@Operation(summary = "Remove registro de uma entrega", description = "", tags = {"Entregas"})
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deletarEntrega(@PathVariable Long id) {

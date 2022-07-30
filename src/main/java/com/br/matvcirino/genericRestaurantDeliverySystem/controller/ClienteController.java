@@ -18,29 +18,37 @@ import com.br.matvcirino.genericRestaurantDeliverySystem.entity.Cliente;
 import com.br.matvcirino.genericRestaurantDeliverySystem.exceptions.ClienteNotFoundException;
 import com.br.matvcirino.genericRestaurantDeliverySystem.repository.RepositorioCliente;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/clientes")
+@Tag(name = "Clientes", description = "API para controle de clientes")
 public class ClienteController {
 
 	@Autowired
 	private RepositorioCliente repositorio;
 
+	@Operation(summary = "Lista todos os clientes registrados", description = "", tags = {"Clientes"})
 	@GetMapping
 	List<Cliente> listarTodos() {
 		return repositorio.findAll();
 	}
 
+	@Operation(summary = "Registra um cliente", description = "Requer nome, telefone e endereço do cliente.", tags = {"Clientes"})
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Cliente novoCliente(@RequestBody Cliente novoCliente) {
 		return repositorio.save(novoCliente);
 	}
 
+	@Operation(summary = "Mostra um cliente, buscando por seu ID", description = "", tags = {"Clientes"})
 	@GetMapping("/{id}")
 	Cliente listarUm(@PathVariable Long id) {
 		return repositorio.findById(id).orElseThrow(() -> new ClienteNotFoundException(id));
 	}
 
+	@Operation(summary = "Atualiza dados de um cliente", description = "Requer nome, telefone e endereço.", tags = {"Clientes"})
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente novoCliente) {
@@ -52,6 +60,7 @@ public class ClienteController {
 		}).orElseThrow(() -> new ClienteNotFoundException(id));
 	}
 
+	@Operation(summary = "Remove registro de um cliente", description = "", tags = {"Clientes"})
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void deletarCliente(@PathVariable Long id) {
